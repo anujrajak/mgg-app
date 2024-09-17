@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 import { FaUser } from "react-icons/fa";
-import { MdDashboard } from "react-icons/md";
+import { MdDashboard, MdCategory } from "react-icons/md";
 
 export interface RoutesType {
   name: string;
@@ -17,10 +17,17 @@ const routes = [
     icon: <MdDashboard />,
   },
   {
+    name: "Category",
+    layout: "/admin",
+    path: "category",
+    icon: <MdCategory />,
+  },
+  {
     name: "Profile",
     layout: "/admin",
     path: "profile",
     icon: <FaUser />,
   },
 ];
+
 export default routes;

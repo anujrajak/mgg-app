@@ -2,7 +2,7 @@ import React from "react";
 import Dropdown from "@/components/dropdown";
 import { FiAlignJustify } from "react-icons/fi";
 import NavLink from "@/components/link/NavLink";
-// import navbarimage from "/public/img/layout/Navbar.png";
+
 import { BsArrowBarUp } from "react-icons/bs";
 import { FiSearch } from "react-icons/fi";
 import { RiMoonFill, RiSunFill } from "react-icons/ri";
@@ -11,6 +11,7 @@ import {
   IoMdNotificationsOutline,
   IoMdInformationCircleOutline,
 } from "react-icons/io";
+
 import avatar from "@/app/favicon.ico";
 import Image from "next/image";
 import { useTheme } from "next-themes";
@@ -36,8 +37,7 @@ const Navbar = (props: {
           >
             Pages
             <span className="mx-1 text-sm text-navy-700 hover:text-navy-700 dark:text-white">
-              {" "}
-              /{" "}
+              /
             </span>
           </a>
           <NavLink

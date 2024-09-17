@@ -15,7 +15,7 @@ export const findCurrentRoute = (routes: any, pathname: string): any => {
 
 export const getActiveRoute = (routes: any, pathname: string): string => {
   const route = findCurrentRoute(routes, pathname);
-  return route?.name || "Main Dashboard";
+  return route?.name || "Dashboard";
 };
 
 export const getActiveNavbar = (routes: any, pathname: string): boolean => {
