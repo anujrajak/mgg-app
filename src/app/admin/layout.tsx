@@ -1,7 +1,7 @@
 "use client";
 // Layout components
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 
 import Navbar from "@/components/navbar";
@@ -10,10 +10,30 @@ import Footer from "@/components/footer/Footer";
 import { getActiveNavbar, getActiveRoute } from "@/utils/navigation";
 import routes from "@/routes";
 
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 export default function Admin({ children }: { children: React.ReactNode }) {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
   // states and functions
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+
+  console.log("session ===>", session);
+
+  useEffect(() => {
+    if (status === "loading") return; // Do nothing while loading
+
+    if (!session) {
+      router.push("/auth/sign-in"); // Redirect to sign-in page if not authenticated
+    }
+  }, [session, status, router]);
+
+  if (status === "loading" || !session) {
+    return <div>Loading...</div>; // Optionally show a loading state
+  }
 
   return (
     <div className="flex h-full w-full bg-background-100 dark:bg-background-900">

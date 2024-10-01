@@ -190,7 +190,7 @@ const Navbar = (props: {
                 Newsletter Settings
               </a>
               <button
-                onClick={() => signOut()}
+                onClick={() => signOut({ callbackUrl: "/admin" })}
                 className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
               >
                 Log Out

@@ -43,20 +43,20 @@ const authOptions = {
   session: {
     strategy: "jwt",
   },
-  //   callbacks: {
-  //     // async jwt({ token, user }) {
-  //     //   if (user) {
-  //     //     token.accessToken = user.token; // Store the JWT token
-  //     //   }
-  //     //   return token;
-  //     // },
-  //     // async session({ session, token }) {
-  //     //   session.accessToken = token.accessToken; // Attach the JWT token to the session
-  //     //   return session;
-  //     // },
-  //   },
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.accessToken = user.token; // Store the JWT token
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.accessToken = token.accessToken; // Attach the JWT token to the session
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST, authOptions };

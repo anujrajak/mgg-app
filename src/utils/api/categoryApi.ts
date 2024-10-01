@@ -1,4 +1,4 @@
-import axios from "@/app/lib/axiosInstaance";
+import axios from "@/app/lib/axiosInstance";
 import { ICategory } from "@/app/types/apiTypes";
 import { ApiConstants } from "@/enum/apiConstants";
 import { useMutation, useQuery } from "react-query";
