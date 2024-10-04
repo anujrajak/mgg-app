@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { GiDiamonds } from "react-icons/gi";
 import { HiArrowLongLeft, HiOutlineArrowLongRight } from "react-icons/hi2";
 import DiscountCard from "./DiscountCard";
 
@@ -61,13 +60,6 @@ const cardsData = [
     imageUrl:
       "https://images.pexels.com/photos/4938502/pexels-photo-4938502.jpeg",
   },
-  {
-    id: 9,
-    discountLabel: "70% Off",
-    description: "Save more on your next purchase",
-    imageUrl:
-      "https://images.pexels.com/photos/26614953/pexels-photo-26614953/free-photo-of-close-up-of-ceramic-cups-and-a-vase.jpeg",
-  },
 ];
 
 export default function HorizontalScrollList() {
@@ -78,8 +70,8 @@ export default function HorizontalScrollList() {
   function getItemsPerPage() {
     if (window.innerWidth < 640) return 1;
     if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1024) return 2;
-    return 3;
+    if (window.innerWidth < 1024) return 1;
+    return 2;
   }
 
   // Effect to handle window resize
@@ -102,10 +94,6 @@ export default function HorizontalScrollList() {
 
   const totalPages = Math.ceil(cardsData.length / itemsPerPage);
 
-  const handleDiamondClick = (index) => {
-    setCurrentIndex(index);
-  };
-
   const handleNextClick = () => {
     if (currentIndex < totalPages - 1) {
       setCurrentIndex(currentIndex + 1);
@@ -119,62 +107,59 @@ export default function HorizontalScrollList() {
   };
 
   return (
-    <section className="flex justify-center items-center">
-      <div className="container flex flex-col my-4">
-        <div className="relative">
-          <div className="flex justify-center items-center overflow-x-auto space-x-4 p-4 snap-x snap-mandatory">
+    <section className="mt-[80px]">
+      <h1 className="text-center text-3xl mb-6 text-[#323232] font-normal">
+        Recently Reviewed
+      </h1>
+      <div className="flex justify-center items-center">
+        <div className="container flex flex-col relative">
+          {/* Left Arrow */}
+          <button
+            onClick={handlePrevClick}
+            disabled={currentIndex === 0}
+            className={`absolute left-0 transform -translate-y-1/2 top-1/2 bg-white rounded-full p-2 shadow ${
+              currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
+            } bg-gradient-to-r from-[#4F9531] to-[#21747C]`}
+          >
+            <HiArrowLongLeft size={20} className="text-white " />
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={handleNextClick}
+            disabled={currentIndex === totalPages - 1}
+            className={`absolute right-0 transform -translate-y-1/2 top-1/2 bg-white rounded-full p-2 shadow ${
+              currentIndex === totalPages - 1
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            } bg-gradient-to-r from-[#4F9531] to-[#21747C]`}
+          >
+            <HiOutlineArrowLongRight
+              size={20}
+              className="text-white bg-gradient-to-r from-[#4F9531] to-[#21747C]"
+            />
+          </button>
+
+          <div className="flex justify-between items-center overflow-x-auto px-20 snap-x snap-mandatory">
             {cardsData
               .slice(
                 currentIndex * itemsPerPage,
                 (currentIndex + 1) * itemsPerPage
               )
               .map((card) => (
-                <div key={card.id} className="snap-start w-full">
+                <div
+                  key={card.id}
+                  className="snap-start max-w-[700px] gap-[20px]"
+                >
                   <DiscountCard
                     key={card.id}
                     discountLabel={card.discountLabel}
                     description={card.description}
                     imageUrl={card.imageUrl}
+                    classes="w-[700px] max-w-[700px]"
                   />
                 </div>
               ))}
-          </div>
-
-          <div className="absolute left-1/2 transform -translate-x-1/2 flex items-center space-x-1 mt-10">
-            <button onClick={handlePrevClick} disabled={currentIndex === 0}>
-              <HiArrowLongLeft
-                size={24}
-                className={`text-[#2D7C68] ${
-                  currentIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              />
-            </button>
-
-            {[...Array(totalPages)].map((_, index) => (
-              <button
-                key={index}
-                className={`flex items-center justify-center w-6 h-6 rounded-full ${
-                  currentIndex === index ? "text-[#2D7C68]" : "text-gray-400"
-                }`}
-                onClick={() => handleDiamondClick(index)}
-              >
-                <GiDiamonds size={12} />
-              </button>
-            ))}
-
-            <button
-              onClick={handleNextClick}
-              disabled={currentIndex === totalPages - 1}
-            >
-              <HiOutlineArrowLongRight
-                size={24}
-                className={`text-[#2D7C68] ${
-                  currentIndex === totalPages - 1
-                    ? "opacity-50 cursor-not-allowed"
-                    : ""
-                }`}
-              />
-            </button>
           </div>
         </div>
       </div>

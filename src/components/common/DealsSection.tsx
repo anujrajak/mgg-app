@@ -62,10 +62,10 @@ const products = [
 export default function DealsSection() {
   return (
     <section className="py-10">
-      <h1 className="text-center text-3xl font-bold mb-6 text-[#323232] font-normal">
+      <h1 className="text-center text-3xl mb-6 text-[#323232] font-normal">
         Top Deals
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 px-4">
         {products.map((product) => (
           <ProductCard
             key={product.id}

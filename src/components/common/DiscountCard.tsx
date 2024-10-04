@@ -1,10 +1,17 @@
 // components/DiscountCard.js
 import Link from "next/link";
 
-export default function DiscountCard({ discountLabel, description, imageUrl }) {
+export default function DiscountCard({
+  discountLabel,
+  description,
+  imageUrl,
+  classes = "",
+}) {
   return (
     <div
-      className="card w-96 bg-cover bg-center shadow-lg rounded-lg p-4 relative h-96 cursor-pointer"
+      className={`card w-auto max-w-[652px] bg-cover bg-center shadow-lg rounded-lg p-4 relative h-96 cursor-pointer ${
+        classes ? classes : ""
+      }`}
       style={{ backgroundImage: `url(${imageUrl})` }} // Set the background image
     >
       <div className="ml-6 mt-6">

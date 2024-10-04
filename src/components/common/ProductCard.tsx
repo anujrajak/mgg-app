@@ -1,6 +1,6 @@
 export default function ProductCard({ imageUrl, title, date, description }) {
   return (
-    <div className="card w-96 bg-white rounded-lg relative border border-gray">
+    <div className="card w-auto bg-white rounded-lg relative border border-gray">
       {/* Featured Chip */}
       <div className="absolute top-4 left-4 bg-gradient-to-r from-[#4F9531] to-[#21747C] text-white text-xs px-2 py-1 mt-2 ml-2 rounded-full">
         Featured

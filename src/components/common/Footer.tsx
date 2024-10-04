@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <>
-      <footer className="bg-[#21747C] h-[400px] flex flex-col justify-between p-6 text-white px-4">
+      <footer className="bg-[#21747C] h-80 flex flex-col justify-between p-6 text-white px-4">
         <div className="my-auto flex justify-center items-center px-4 md:px-36">
           <div className="container flex justify-between items-center">
             {/* Logo on the left */}
