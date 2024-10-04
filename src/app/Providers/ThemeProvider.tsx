@@ -12,3 +12,5 @@ export function ThemeProvider({ children }: IProps) {
     </NextThemesProvider>
   );
 }
+
+           

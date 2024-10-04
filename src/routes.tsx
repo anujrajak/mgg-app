@@ -28,6 +28,13 @@ const routes = [
     path: "profile",
     icon: <FaUser />,
   },
+
+  {
+    name: "Users",
+    layout: "/admin",
+    path: "users",
+    icon: <FaUser />,
+  },
 ];
 
 export default routes;

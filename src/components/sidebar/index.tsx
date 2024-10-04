@@ -22,7 +22,7 @@ function SidebarHorizon(props: { routes: any; [x: string]: any }) {
 
       <div className={`mx-[56px] mt-[50px] flex items-center`}>
         <div className="ml-1 mt-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-navy-700 dark:text-white">
-          Mgg <span className="font-medium">app</span>
+          mgg <span className="font-medium">app</span>
         </div>
       </div>
       <div className="mb-7 mt-[58px] h-px bg-gray-300 dark:bg-white/30" />

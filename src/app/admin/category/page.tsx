@@ -91,7 +91,7 @@ export default function CategoryPage() {
               <tbody role="rowgroup">
                 {
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  data.map((row: any, i: number) => (
+                  (data || []).map((row: any, i: number) => (
                     <tr role="row" key={`${row.name}-category`}>
                       <td
                         role="cell"
