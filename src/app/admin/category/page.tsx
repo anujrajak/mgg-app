@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 export default function CategoryPage() {
   const [name, setName] = useState<string>("");
   const [parentName, setParentName] = useState<string>("");
+  const [sequence, setSequence] = useState<string>("");
 
   const categoryModalRef = useRef();
   const { data, isLoading } = useFetchCategories();
@@ -20,6 +21,7 @@ export default function CategoryPage() {
       await mutateAsync({
         name,
         parentCategory: parentName,
+        sequence,
       });
       toast("Category added successfully.", { theme: "dark" });
     } catch (error) {
@@ -32,8 +34,9 @@ export default function CategoryPage() {
     setParentName(event?.target?.value);
 
   const updateName = (event: ChangeEvent) => setName(event?.target?.value);
+  const updateSequence = (event: ChangeEvent) => setSequence(event?.target?.value);
 
-  const tabbleHead = ["#", "Name", "Description", "Type", "Parent Category", "Created At"].map(
+  const tabbleHead = ["#", "Name", "Description", "Sequence", "Type", "Parent Category", "Created At"].map(
     (title, i) => (
       <th
         key={`title-${i}`}
@@ -115,6 +118,12 @@ export default function CategoryPage() {
                         role="cell"
                         className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
                       >
+                        {row.sequence}
+                      </td>
+                      <td
+                        role="cell"
+                        className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
+                      >
                         {
                             row?.parentCategory?.name ? <div className="badge badge-secondary badge-outline">Child</div> : <div className="badge badge-primary badge-outline">Parent</div>
                         } 
@@ -162,6 +171,21 @@ export default function CategoryPage() {
               type="text"
               onChange={updateName}
               value={name}
+              className={`input input-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600 ${
+                name ? "input-success" : "input-error"
+              }`}
+            />
+          </label>
+          <label className="form-control w-full">
+            <div className="label">
+              <span className="label-text">Sequence*</span>
+            </div>
+            <input
+              placeholder="Category sequence..."
+              id="sequence"
+              type="number"
+              onChange={updateSequence}
+              value={sequence}
               className={`input input-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600 ${
                 name ? "input-success" : "input-error"
               }`}

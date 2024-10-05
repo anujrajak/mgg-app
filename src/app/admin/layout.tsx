@@ -52,7 +52,7 @@ export default function Admin({ children }: { children: React.ReactNode }) {
               brandText={getActiveRoute(routes, pathname)}
               secondary={getActiveNavbar(routes, pathname)}
             />
-            <div className="mx-auto min-h-screen p-2 !pt-[10px] md:p-2">
+            <div className="mx-auto min-h-screen p-[16px] !pt-[16px] md:p-[16px]">
               {children}
             </div>
             <div className="p-3">
