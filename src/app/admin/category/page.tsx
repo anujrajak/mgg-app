@@ -9,6 +9,7 @@ export default function CategoryPage() {
   const [name, setName] = useState<string>("");
   const [parentName, setParentName] = useState<string>("");
   const [sequence, setSequence] = useState<string>("");
+  const [categoryType, setCategoryType] = useState<string>("");
 
   const categoryModalRef = useRef();
   const { data, isLoading } = useFetchCategories();
@@ -22,6 +23,7 @@ export default function CategoryPage() {
         name,
         parentCategory: parentName,
         sequence,
+        categoryType,
       });
       toast("Category added successfully.", { theme: "dark" });
     } catch (error) {
@@ -34,22 +36,31 @@ export default function CategoryPage() {
     setParentName(event?.target?.value);
 
   const updateName = (event: ChangeEvent) => setName(event?.target?.value);
-  const updateSequence = (event: ChangeEvent) => setSequence(event?.target?.value);
+  const updateSequence = (event: ChangeEvent) =>
+    setSequence(event?.target?.value);
+  const updateCategoryType = (event: ChangeEvent) =>
+    setCategoryType(event?.target?.value);
 
-  const tabbleHead = ["#", "Name", "Description", "Sequence", "Type", "Parent Category", "Created At"].map(
-    (title, i) => (
-      <th
-        key={`title-${i}`}
-        role="columnheader"
-        className="border-b border-gray-200 pr-16 pb-[10px] text-start dark:!border-navy-700"
-        style={{ cursor: "pointer" }}
-      >
-        <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs">
-          {title}
-        </div>
-      </th>
-    )
-  );
+  const tabbleHead = [
+    "#",
+    "Name",
+    "Description",
+    "Sequence",
+    "Category Type",
+    "Parent Category",
+    "Created At",
+  ].map((title, i) => (
+    <th
+      key={`title-${i}`}
+      role="columnheader"
+      className="border-b border-gray-200 pr-16 pb-[10px] text-start dark:!border-navy-700"
+      style={{ cursor: "pointer" }}
+    >
+      <div className="text-xs font-bold tracking-wide text-gray-600 lg:text-xs">
+        {title}
+      </div>
+    </th>
+  ));
 
   return (
     <div className="p-2">
@@ -124,17 +135,33 @@ export default function CategoryPage() {
                         role="cell"
                         className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
                       >
-                        {
-                            row?.parentCategory?.name ? <div className="badge badge-secondary badge-outline">Child</div> : <div className="badge badge-primary badge-outline">Parent</div>
-                        } 
+                        <div className="badge badge-success badge-outline mr-2">
+                          {row.categoryType}
+                        </div>
+                        {row?.parentCategory?.name ? (
+                          <div className="badge badge-secondary badge-outline">
+                            Child
+                          </div>
+                        ) : (
+                          <div className="badge badge-primary badge-outline">
+                            Parent
+                          </div>
+                        )}
                       </td>
                       <td
                         role="cell"
                         className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
                       >
-                        {
-                            row?.parentCategory?.name ? <div style={{textTransform: 'capitalize'}} className="badge badge-warning">{row?.parentCategory?.name}</div> : ''
-                        } 
+                        {row?.parentCategory?.name ? (
+                          <div
+                            style={{ textTransform: "capitalize" }}
+                            className="badge badge-warning"
+                          >
+                            {row?.parentCategory?.name}
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </td>
                       <td
                         role="cell"
@@ -193,27 +220,37 @@ export default function CategoryPage() {
           </label>
           <label className="form-control w-full">
             <div className="label">
+              <span className="label-text">Select Category Type*</span>
+            </div>
+            <select
+              onChange={updateCategoryType}
+              id="categoryType"
+              value={categoryType}
+              className="select select-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600"
+            >
+              <option>blog</option>
+              <option>deal</option>
+              <option>product</option>
+            </select>
+          </label>
+          <label className="form-control w-full">
+            <div className="label">
               <span className="label-text">Parent Name</span>
             </div>
-            {/* <input
-              placeholder="Enter parent category name..."
-              id="parentCategoryName"
-              type="text"
-              onChange={updateParentName}
-              value={parentName}
-              className="input input-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600"
-            /> */}
             <select
               onChange={updateParentName}
               id="parentCategoryName"
               value={parentName}
-              className="select select-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600">
-              <option>None</option>
-              <option>Homer</option>
-              <option>Marge</option>
-              <option>Bart</option>
-              <option>Lisa</option>
-              <option>Maggie</option>
+              className="select select-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600"
+            >
+              {isLoading
+                ? ""
+                : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  data.map((row: any, i: number) => {
+                    return (
+                      <option value={row.name}>{row.name.toUpperCase()}</option>
+                    );
+                  })}
             </select>
           </label>
 

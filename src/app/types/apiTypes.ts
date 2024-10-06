@@ -1,5 +1,6 @@
 export interface ICategory {
   name: string;
   parentCategory?: string;
-  sequence: string
+  sequence: string,
+  categoryType: string
 }
