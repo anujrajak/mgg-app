@@ -33,7 +33,7 @@ export default function CategoryPage() {
 
   const updateName = (event: ChangeEvent) => setName(event?.target?.value);
 
-  const tabbleHead = ["#", "Name", "Description", "Created At"].map(
+  const tabbleHead = ["#", "Name", "Description", "Type", "Parent Category", "Created At"].map(
     (title, i) => (
       <th
         key={`title-${i}`}
@@ -115,6 +115,22 @@ export default function CategoryPage() {
                         role="cell"
                         className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
                       >
+                        {
+                            row?.parentCategory?.name ? <div className="badge badge-secondary badge-outline">Child</div> : <div className="badge badge-primary badge-outline">Parent</div>
+                        } 
+                      </td>
+                      <td
+                        role="cell"
+                        className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
+                      >
+                        {
+                            row?.parentCategory?.name ? <div style={{textTransform: 'capitalize'}} className="badge badge-warning">{row?.parentCategory?.name}</div> : ''
+                        } 
+                      </td>
+                      <td
+                        role="cell"
+                        className="pt-[14px] pb-[16px] sm:text-[14px] text-gray-900 dark:text-gray-200"
+                      >
                         {row.createdAt}
                       </td>
                     </tr>
@@ -155,14 +171,26 @@ export default function CategoryPage() {
             <div className="label">
               <span className="label-text">Parent Name</span>
             </div>
-            <input
+            {/* <input
               placeholder="Enter parent category name..."
               id="parentCategoryName"
               type="text"
               onChange={updateParentName}
               value={parentName}
               className="input input-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600"
-            />
+            /> */}
+            <select
+              onChange={updateParentName}
+              id="parentCategoryName"
+              value={parentName}
+              className="select select-bordered w-full mb-3 bg-transparent text-gray-900 dark:bg-transparent dark:text-white border-slate-300 dark:border-slate-600">
+              <option>None</option>
+              <option>Homer</option>
+              <option>Marge</option>
+              <option>Bart</option>
+              <option>Lisa</option>
+              <option>Maggie</option>
+            </select>
           </label>
 
           <button

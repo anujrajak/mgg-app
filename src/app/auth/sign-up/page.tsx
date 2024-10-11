@@ -1,39 +1,36 @@
 "use client";
 
 import InputField from "@/components/fields/InputField";
-import { FcGoogle } from "react-icons/fc";
-import Checkbox from "@/components/checkbox";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
 function SignInDefault() {
-  const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const [cpassword, setCPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log({ email, password });
-    const result = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-      rememberMe,
-      // redirectUrl: "/admin",
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fullname: name,
+        password,
+        confirmPassword: cpassword,
+        email,
+      }),
     });
 
-    if (result?.error) {
-      console.log(result);
-      toast(result.error, { theme: "dark" });
-    } else {
-      // Redirect to profile or dashboard after successful login
-      router.push("/admin");
+    if (!response.ok) {
+      const data = await response.json();
+      toast(data.message || "Error signing up", { theme: "dark" });
+      return;
     }
+    toast("Signed up successfully.", { theme: "dark" });
   };
 
   return (
@@ -44,10 +41,10 @@ function SignInDefault() {
             {/* Sign in section */}
             <div className="mt-[10vh] w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
               <h3 className="mb-2.5 text-4xl font-bold text-navy-700 dark:text-white">
-                Sign In
+                Sign Up
               </h3>
               <p className="mb-9 ml-1 text-base text-gray-600 dark:text-gray-300">
-                Enter your email and password to sign in!
+                Enter your email and password to sign up!
               </p>
               <div className="mb-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-xl bg-lightPrimary hover:cursor-pointer dark:bg-navy-800 dark:text-white">
                 <div className="rounded-full text-xl">
@@ -66,6 +63,18 @@ function SignInDefault() {
                 <div className="h-px w-full bg-gray-200 dark:bg-navy-700" />
               </div>
               <form onSubmit={handleSubmit}>
+                {/* Name */}
+                <InputField
+                  variant="auth"
+                  extra="mb-3"
+                  label="Name*"
+                  placeholder="John..."
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+
                 {/* Email */}
                 <InputField
                   variant="auth"
@@ -89,42 +98,35 @@ function SignInDefault() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                {/* Checkbox */}
-                <div className="mb-4 flex items-center justify-between px-2">
-                  <div className="mt-2 flex items-center">
-                    <Checkbox
-                      label="Remember Me"
-                      value={rememberMe}
-                      name="rememberMe"
-                      onChange={(e) => setRememberMe(!rememberMe)}
-                    />
-                    <p className="ml-2 text-sm font-medium text-navy-700 dark:text-white">
-                      Keep me logged In
-                    </p>
-                  </div>
-                  <a
-                    className="text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
-                    href="#"
-                  >
-                    Forgot Password?
-                  </a>
-                </div>
+
+                {/* Password */}
+                <InputField
+                  variant="auth"
+                  extra="mb-3"
+                  label="Confirm Password*"
+                  placeholder="Min. 8 characters"
+                  id="confirmPassword"
+                  type="password"
+                  value={cpassword}
+                  onChange={(e) => setCPassword(e.target.value)}
+                />
+
                 <button
                   className="linear w-full rounded-xl bg-brand-500 py-3 text-base font-medium text-white transition duration-200 hover:bg-brand-600 active:bg-brand-700 dark:bg-brand-400 dark:text-white dark:hover:bg-brand-300 dark:active:bg-brand-200"
                   type="submit"
                 >
-                  Sign In
+                  Sign Up
                 </button>
               </form>
               <div className="mt-4">
                 <span className="text-sm font-medium text-navy-700 dark:text-gray-500">
-                  Not registered yet?
+                  Already have account?
                 </span>
                 <a
-                  href="/auth/sign-up"
+                  href="/auth/sign-in"
                   className="ml-1 text-sm font-medium text-brand-500 hover:text-brand-600 dark:text-white"
                 >
-                  Create an account
+                  Sign In
                 </a>
               </div>
             </div>

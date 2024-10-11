@@ -15,7 +15,7 @@ import {
 import avatar from "@/app/favicon.ico";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const Navbar = (props: {
   onOpenSidenav: () => void;
@@ -189,12 +189,12 @@ const Navbar = (props: {
               >
                 Newsletter Settings
               </a>
-              <Link
-                href="/auth/sign-in"
+              <button
+                onClick={() => signOut({ callbackUrl: "/admin" })}
                 className="mt-3 text-sm font-medium text-red-500 hover:text-red-500"
               >
                 Log Out
-              </Link>
+              </button>
             </div>
           </div>
         </Dropdown>

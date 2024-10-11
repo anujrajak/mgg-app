@@ -5,7 +5,8 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 import { ThemeProvider } from "./Providers/ThemeProvider";
 import ReactQueryProvider from "./Providers/ReactQueryProvider";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import { SessionProvider } from "next-auth/react";
 
 export default function RootLayout({
   children,
@@ -16,7 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body id={"root"}>
         <ThemeProvider>
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            <SessionProvider>{children}</SessionProvider>
+          </ReactQueryProvider>
           <ToastContainer />
         </ThemeProvider>
       </body>
