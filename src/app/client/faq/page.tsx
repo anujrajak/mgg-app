@@ -73,7 +73,7 @@ const FAQ: FC = () => {
     </div>
     <div className="collapse-content">
       <p>
-        You can reach our customer support team through the "Contact Us" page on our website. We aim to respond to all inquiries within 24 hours.
+        You can reach our customer support team through the  page on our website. We aim to respond to all inquiries within 24 hours.
       </p>
     </div>
   </div>
