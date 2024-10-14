@@ -59,8 +59,9 @@ const ProductDetails: React.FC = () => {
     <div>
         <Header/>
         <Navbar/>
-      <div className="relative w-full   mx-4 h-[300px] mb-10 flex justify-center ">
-        <div
+      <div className=" w-full  ">
+        <div className='relative mx-4  my-5 flex justify-center h-[300px] '>
+         <div
           className="absolute top-0 left-0 right-0 bottom-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${product_banner.src})` }}
         >
@@ -70,24 +71,34 @@ const ProductDetails: React.FC = () => {
               At GlamGuider, we are dedicated to helping you discover the latest trends in beauty and fashion. Our curated selection of products and expert tips empower you to express your unique style with confidence.
             </p>
           </div>
+        </div>  
         </div>
+
+       
       </div>
 
-      <div className="my-10 w-full ">
-        <h1 className=" text-center">Why You’ll Love The Products</h1>
+      <div className="my-10 w-full  ">
+        <div className='mx-4'>
+          <h1 className=" text-center">Why You’ll Love The Products</h1>
         <p className="">
           Choosing a body wash infused with organic and Ayurvedic ingredients offers a holistic approach to skincare that benefits both the body and the environment. Here are some key reasons why these natural components are essential:
         </p>
+ 
+        </div>
+       
 
-        <div className="grid grid-cols-2 gap-5 ">
-          {Array(4).fill(null).map((_, index) => (
+        <div className="w-full">
+          <div className='mx-4  grid grid-cols-2 gap-5'>
+           {Array(4).fill(null).map((_, index) => (
             <div key={index} className="w-full  bg-[#EDF5F5] p-2">
               <h1 className="text-[26px]">Gentle and Nourishing</h1>
               <p>
                 Organic ingredients like aloe vera and coconut oil provide gentle hydration, making them suitable for all skin types, including sensitive skin. They help maintain the skin’s moisture barrier without harsh chemicals.
               </p>
             </div>
-          ))}
+          ))}  
+          </div>
+         
         </div> 
       </div>
 
