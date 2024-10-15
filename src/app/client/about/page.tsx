@@ -16,11 +16,13 @@ import core_6 from "../../../assets/imgs/core_6.png";
 
 interface Core {
   id: number;
-  src: StaticImageData; 
+  src:StaticImageData;
   alt: string;
   heading: string;
   content: string;
 }
+ 
+
 
 const About: React.FC = () => {
   const cores: Core[] = [
@@ -129,19 +131,17 @@ const About: React.FC = () => {
 
    
 
-
-
-<div className="relative mb-48 hidden md:block w-full"> 
+<div className="w-full ">
+<div className="relative mb-5 hidden md:block  mx-4"> 
   <Image
     src={who}
     alt="Who We Are"
     className="w-full h-auto object-cover"
     layout="responsive"
-    width={1200} 
-    height={500} 
+  
   />
   <div className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center">
-    <div className="bg-[#EDF5F5] mx-[141px] p-10 text-center space-y-6">
+    <div className="bg-[#EDF5F5]  p-10 text-center space-y-6">
       <p className="text-lg">
         We are dedicated to providing a seamless shopping experience that prioritizes convenience, inclusivity, and customer satisfaction.
       </p>
@@ -151,6 +151,7 @@ const About: React.FC = () => {
     </div>
   </div>
 </div>
+</div>
 
 
 
@@ -158,24 +159,27 @@ const About: React.FC = () => {
 
 
 
-<div className="relative mb-20 w-full md:hidden">
+<div className="w-full">
+
+<div className="relative  mx-4 md:hidden">
   <Image
     src={who}
     alt="Who We Are"
     className="w-full h-auto object-cover"
     layout="responsive"
-    width={1000}
-    height={1200}
+  
   />
-  <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-[#EDF5F5] p-4 text-center rounded-md ">
-    <p className="text-sm md:text-base">
+  <div className="absolute top-0 bottom-0 left-0 right-0 flex flex-col justify-center items-center bg-[#EDF5F5]  text-center rounded-md ">
+    <p className="text-sm w-full h-[50%] ">
       We are dedicated to providing a seamless shopping experience that prioritizes convenience, inclusivity, and customer satisfaction.
     </p>
-    <p className="text-sm md:text-base">
-      By connecting our community with top-rated products, we inspire confidence and celebrate the beauty in diversity for everyone.
-    </p>
+
   </div>
 </div>
+
+</div>
+
+
 
 
 
