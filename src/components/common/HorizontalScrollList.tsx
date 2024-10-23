@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { GiDiamonds } from "react-icons/gi";
 import { HiArrowLongLeft, HiOutlineArrowLongRight } from "react-icons/hi2";
 import DiscountCard from "./DiscountCard";
+import { isWindowAvailable } from "@/utils/navigation";
 
 const cardsData = [
   {
@@ -76,9 +77,9 @@ export default function HorizontalScrollList() {
 
   // Function to determine how many items to show based on window size
   function getItemsPerPage() {
-    if (window.innerWidth < 640) return 1;
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1024) return 2;
+    if (isWindowAvailable() && window.innerWidth < 640) return 1;
+    if (isWindowAvailable() && window.innerWidth < 768) return 1;
+    if (isWindowAvailable() && window.innerWidth < 1024) return 2;
     return 3;
   }
 
