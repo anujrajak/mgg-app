@@ -1,3 +1,5 @@
+"use client";
+import { useFetchCategories } from "@/utils/api/categoryApi";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 export const menuList = [
@@ -32,11 +34,35 @@ export const menuList = [
 ];
 
 export default function Navbar() {
+  const { data: blogCategories, isLoading: isLoadingCategories } =
+    useFetchCategories("all");
   return (
     <section className="w-full my-auto bg-[#21747C] text-white hidden md:block">
       <div className="container h-16 my-auto mx-auto flex items-center justify-between text-xl">
         <div className="container flex justify-center">
-          {menuList.map((item) => (
+          {isLoadingCategories
+            ? ""
+            : blogCategories.map((item: any) => (
+                <div
+                  className="dropdown dropdown-hover"
+                  key={`${item.name}-dropdown`}
+                >
+                  <button tabIndex={0} className="btn btn-ghost">
+                    {item.name} <MdKeyboardArrowDown className="text-xl" />
+                  </button>
+                  <ul
+                    tabIndex={0}
+                    className="menu dropdown-content bg-[#21747C] rounded-box z-[1] w-52 shadow"
+                  >
+                    {/* {item.options.map((option, i) => (
+                      <li key={`${option.label}-${i}`}>
+                        <a>{option.label}</a>
+                      </li>
+                    ))} */}
+                  </ul>
+                </div>
+              ))}
+          {/* {menuList.map((item) => (
             <div
               className="dropdown dropdown-hover"
               key={`${item.title}-dropdown`}
@@ -55,7 +81,7 @@ export default function Navbar() {
                 ))}
               </ul>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     </section>

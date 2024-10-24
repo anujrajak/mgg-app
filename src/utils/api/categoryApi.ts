@@ -3,9 +3,9 @@ import { ICategory } from "@/app/types/apiTypes";
 import { ApiConstants } from "@/enum/apiConstants";
 import { useMutation, useQuery } from "react-query";
 
-export const fetchCategories = async () => {
+export const fetchCategories = async (type: string) => {
   try {
-    const response = await axios.get(ApiConstants.ADMIN_CATEGORIES);
+    const response = await axios.get(ApiConstants.ADMIN_CATEGORIES+type);
 
     return response.data.categories;
   } catch (error) {
@@ -13,8 +13,9 @@ export const fetchCategories = async () => {
   }
 };
 
-export const useFetchCategories = () =>
-  useQuery(ApiConstants.ADMIN_CATEGORIES, fetchCategories);
+export const useFetchCategories = (type: string) =>
+  // useQuery(ApiConstants.ADMIN_CATEGORIES, fetchCategories);
+useQuery(ApiConstants.ADMIN_CATEGORIES, () => fetchCategories(type));
 
 export const createCategory = async (payload: ICategory) => {
   try {
