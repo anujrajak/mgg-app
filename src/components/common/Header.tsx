@@ -42,13 +42,13 @@ const Header = () => {
             </div>
 
             {/* Sign In Button */}
-            <Link
+            {/* <Link
               href="auth/sign-in"
               type="button"
               className="h-12 text-lg text-white bg-gradient-to-r from-[#4F9531] to-[#21747C] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-full px-4 md:px-5 py-2.5"
             >
               Sign in
-            </Link>
+            </Link> */}
           </div>
         </section>
       </div>
