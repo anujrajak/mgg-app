@@ -5,5 +5,5 @@ export const ApiConstants = {
 };
 
 export const BasePath = {
-  API_BASE_PATH: "http://api.glamguider.com/"
+  API_BASE_PATH: "https://api.glamguider.com/"
 };
