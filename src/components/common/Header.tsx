@@ -1,12 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image"; // Assuming you're using Next.js for images
 import Link from "next/link";
 import { LuSearch } from "react-icons/lu";
 import { AiOutlineClose } from "react-icons/ai";
 import logo from "@/assets/imgs/logo.png";
 import { RiMenu4Fill } from "react-icons/ri";
-import { menuList } from "./Navbar";
+import { useFetchCategories } from "@/utils/api/categoryApi";
+
+function processCategory(blogCategories: any) {
+  let menuItems: any = {};
+  blogCategories.forEach((element: any) => {
+    menuItems[element._id] = element;
+    if (element.parentCategory) {
+      if (!menuItems[element.parentCategory._id]["childs"]) {
+        menuItems[element.parentCategory._id]["childs"] = [];
+      }
+      menuItems[element.parentCategory._id].childs.push(element);
+    }
+  });
+  return menuItems;
+}
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,6 +32,15 @@ const Header = () => {
   const closeDrawer = () => {
     setIsOpen(false);
   };
+
+  const { data: blogCategories, isLoading: isLoadingCategories } =
+    useFetchCategories("blog");
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    if (blogCategories) {
+      setCategories(Object.values(processCategory(blogCategories)));
+    }
+  }, [blogCategories]);
 
   return (
     <>
@@ -110,21 +133,28 @@ const Header = () => {
                 <AiOutlineClose />
               </button>
               {/* Menu List with Collapses */}
-              {menuList.map((item) => (
-                <div key={item.title} className="collapse collapse-arrow mb-2">
-                  <input type="checkbox" />
-                  <div className="collapse-title text-lg">{item.title}</div>
-                  <div className="collapse-content">
-                    <ul>
-                      {item.options.map((option, i) => (
-                        <li key={`${option.label}-${i}`}>
-                          <Link href="#">{option.label}</Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              ))}
+
+              {isLoadingCategories
+                ? ""
+                : categories.map((item: any) => (
+                    <div
+                      key={item.name}
+                      className="collapse collapse-arrow mb-2"
+                    >
+                      <input type="checkbox" />
+                      <div className="collapse-title text-lg">{item.name}</div>
+                      <div className="collapse-content">
+                        <ul>
+                          {item.childs &&
+                            item.childs.map((option: any) => (
+                              <li key={`${option._id}`}>
+                                <Link href="#">{option.name}</Link>
+                              </li>
+                            ))}
+                        </ul>
+                      </div>
+                    </div>
+                  ))}
             </div>
           </div>
         )}
