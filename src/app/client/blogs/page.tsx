@@ -1,14 +1,11 @@
 
-
-
-
 "use client"
 import { useState } from "react";
 import blogs_img from "../../../assets/imgs/contact_us.png"; 
 import blog_1 from "../../../assets/imgs/blog_1.png";
 import recent_post1 from "../../../assets/imgs/recent_post1.png"; 
 import recent_post2 from "../../../assets/imgs/recent_post2.png"; 
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { FaChevronRight} from "react-icons/fa";
 import Image from "next/image";
 import Header from "@/components/common/Header";
 import Navbar from "@/components/common/Navbar";

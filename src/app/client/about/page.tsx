@@ -13,6 +13,9 @@ import core_4 from "../../../assets/imgs/core_4.png";
 import core_5 from "../../../assets/imgs/core_5.png";
 import core_6 from "../../../assets/imgs/core_6.png";
 
+
+type StaticImageData=typeof about_img
+
 interface Core {
   id: number;
   src: StaticImageData;
@@ -20,6 +23,8 @@ interface Core {
   heading: string;
   content: string;
 }
+ 
+
 
 const About: React.FC = () => {
   const cores: Core[] = [
@@ -112,13 +117,14 @@ const About: React.FC = () => {
               height={350}
             />
           </div>
-          <div className="flex flex-col justify-center items-start space-y-5 w-full md:w-[50%] lg:w-[640px]">
+          <div className="flex flex-col justify-center items-start  w-full md:w-[50%] lg:w-[640px]">
             <div className="flex items-center gap-3">
               <Image src={symbol} alt="Symbol" width={40} height={40} />
               <p>
                 At GlamGuider, we believe in empowering individuals through
                 beauty and fashion.
               </p>
+
             </div>
             <div className="flex items-center gap-3">
               <Image src={symbol} alt="Symbol" width={40} height={40} />
@@ -180,7 +186,7 @@ const About: React.FC = () => {
       </div>
 
       <div className="px-4 md:px-8 lg:px-16">
-        <h1 className="text-center text-5xl">Core Values</h1>
+        <h1 className="text-center text-5xl mt-4">Core Values</h1>
         <div className="flex flex-col md:flex-row justify-center items-center gap-5 mt-10">
           {cores.map((core) => (
             <div

@@ -8,6 +8,7 @@ import Header from '@/components/common/Header';
 import Navbar from '@/components/common/Navbar';
 import Footer from '@/components/common/Footer';
 
+type StaticImageData=typeof product_banner
 
 
 interface ProductDetail {
@@ -79,8 +80,8 @@ const ProductDetails: React.FC = () => {
 
       <div className="my-10 w-full  ">
         <div className='mx-4'>
-          <h1 className=" text-center">Why You’ll Love The Products</h1>
-        <p className="">
+          <h1 className=" text-center text-3xl">Why You will Love The Products</h1>
+        <p className="my-5">
           Choosing a body wash infused with organic and Ayurvedic ingredients offers a holistic approach to skincare that benefits both the body and the environment. Here are some key reasons why these natural components are essential:
         </p>
  
@@ -102,27 +103,30 @@ const ProductDetails: React.FC = () => {
         </div> 
       </div>
 
-      <div className="w-full  my-10 hidden  md:block">
-        <h1 className="text-center">Key Ingredients to Look For</h1>
-        <div className="  w-full   flex">
-          <div className='w-1/2 flex items-center justify-center flex-col'>
-            {['Aloe Vera', 'Neem', 'Turmeric', 'Leaf', 'Conclusion'].map((ingredient, index) => (
+      <div className="w-full  my-5 hidden  md:block">
+        <h1 className="text-center text-3xl">Key Ingredients to Look For</h1>
+        <div className="  w-full   flex my-5 ">
+          <div className='w-1/2  mx-4'>
+          <div className='w-full flex items-center justify-center flex-col '>
+             {['Aloe Vera', 'Neem', 'Turmeric', 'Leaf', 'Conclusion'].map((ingredient, index) => (
               <div key={index} className="mb-4">
-                <div className="flex gap-5 items-start">
-                  <Image src={symbol} alt={ingredient} />
-                  <h1 className="text">{ingredient}</h1>
+                <div className="flex gap-5 items-start ">
+                  <Image src={symbol} alt={ingredient}  />
+                  <h1 className="text-3xl">{ingredient}</h1>
                 </div>
-                <p className="">Hydrates and soothes. Neem: Purifies and protects.</p>
+                <p className="text-2xl">Hydrates and soothes. Neem: Purifies and protects.</p>
               </div>
-            ))}
+            ))} 
+          </div>
+          
  
 
 
 
           </div>
 
-          <div className="w-1/2 h-full flex items-center justify-center">
-            <Image src={prod_detail} alt="Product Detail" />
+          <div className="w-1/2 flex items-center  mx-4 ">
+            <Image src={prod_detail} alt="Product Detail" className='w-8/12' />
           </div>
         </div>
       </div>
@@ -131,12 +135,12 @@ const ProductDetails: React.FC = () => {
 
       <div className="w-full md:hidden">
         <div>
-        <h1 className="text-center">Key Ingredients to Look For</h1>    
+        <h1 className="text-center text-2xl my-5">Key Ingredients to Look For</h1>    
         </div>
         
-        <div className="    flex flex-col items-center justify-center ">
+        <div className="    flex flex-col items-center justify-center w-full">
 
-   <div className="w-1/2 h-full flex items-center justify-center">
+   <div className="w-1/2 flex items-center justify-center my-5">
             <Image src={prod_detail} alt="Product Detail" />
           </div>
 
@@ -145,9 +149,9 @@ const ProductDetails: React.FC = () => {
               <div key={index} className="mb-4">
                 <div className="flex gap-5 items-start">
                   <Image src={symbol} alt={ingredient} />
-                  <h1 className="text">{ingredient}</h1>
+                  <h1 className="text-xl">{ingredient}</h1>
                 </div>
-                <p className="">Hydrates and soothes. Neem: Purifies and protects.</p>
+                <p className="text-sm">Hydrates and soothes. Neem: Purifies and protects.</p>
               </div>
             ))}
  
@@ -162,34 +166,43 @@ const ProductDetails: React.FC = () => {
             
 
       <div className='hidden md:block'>
-        <h1 className="text-center text-">All Products</h1>
-        <div className="w-full mx-auto flex my-10 gap-5 p-3">
-          {proDetail.map((pro) => (
-            <div key={pro.id} className="w-full bg-[#d3d0d0] ">
-              <Image src={pro.src} alt={pro.product} className="w-full  object-contain rounded-lg" />
-              <h1 className="text-[20px]">{pro.product}</h1>
-              <p>{pro.subHeading}</p>
-              <button className="text-white w-10/12 py-2 rounded-full bg-[#21747C] mb-2 my-4">
-                {pro.exploreMore}
-              </button>
-            </div>
-          ))}
-        </div>
+        <h1 className="text-center text-4xl">All Products</h1>
+    
+<div className="w-full mx-auto flex my-10 gap-5 p-3">
+  {proDetail.map((pro) => (
+    <div key={pro.id} className="w-full bg-[#d3d0d0]">
+      <Image src={pro.src} alt={pro.product} className="w-full object-contain rounded-lg" />
+      <h1 className="text-[20px] p-2">{pro.product}</h1>
+      <p className='p-2'>{pro.subHeading}</p>
+  
+      <div className="flex justify-center">
+        <button className="text-white w-1/2 p-2 rounded-full bg-[#21747C] mb-4 my-4">
+          {pro.exploreMore}
+        </button>
+      </div>
+    </div>
+  ))}
+</div>
+
       </div>
 
 
 
       <div className=' md:hidden'>
-        <h1 className="text-center ">All Products</h1>
-        <div className="w-full mx-4  my-10 gap-5 p-3 grid grid-cols-2 md:">
+        <h1 className="text-center text-3xl">All Products</h1>
+        <div className="w-full   my-5 gap-5 p-3 grid grid-cols-2 md:">
           {proDetail.map((pro) => (
             <div key={pro.id} className="w-full bg-[#d3d0d0] ">
               <Image src={pro.src} alt={pro.product} className="w-full  object-contain rounded-lg" />
-              <h1 className="text-[16px]">{pro.product}</h1>
-              <p>{pro.subHeading}</p>
-              <button className="text-white w-10/12 py-2 rounded-full bg-[#21747C] mb-2 my-4 text-center">
+              <h1 className="text-[16px] p-2">{pro.product}</h1>
+              <p className='p-2'>{pro.subHeading}</p>
+              <div className='flex justify-center'>
+
+               <button className="text-white w-10/12 p-2 rounded-full bg-[#21747C] mb-2 my-4 text-center">
                 {pro.exploreMore}
-              </button>
+              </button> 
+                </div>
+              
             </div>
           ))}
         </div>
