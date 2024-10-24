@@ -26,7 +26,6 @@ export default function Navbar() {
       setCategories(Object.values(processCategory(blogCategories)));
     }
   }, [blogCategories]);
-  // console.log(categories);
   return (
     <section className="w-full my-auto bg-[#21747C] text-white hidden md:block">
       <div className="container h-16 my-auto mx-auto flex items-center justify-between text-xl">

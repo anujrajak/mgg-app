@@ -1,7 +1,8 @@
+import { BasePath } from "@/enum/apiConstants";
 import axios from "axios";
 import { getSession } from "next-auth/react";
 
-const BASE_URL = "https://api.glamguider.com/";
+// const BASE_URL = "http://localhost:3000/";
 // const TOKEN = localStorage.getItem("token");
 
 // export default axios.create({
@@ -14,7 +15,7 @@ const BASE_URL = "https://api.glamguider.com/";
 // });
 
 const axiosInstance = axios.create({
-  baseURL: BASE_URL, // Set your API base URL
+  baseURL: BasePath.API_BASE_PATH, // Set your API base URL
 });
 
 // Request interceptor to add the token to headers
